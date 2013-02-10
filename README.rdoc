@@ -1,0 +1,43 @@
+Step 1 : RequestPermissions API (API credentials)
+
+1. Curl with the sample paypal.yml config values:
+
+curl -s --insecure -H "X-PAYPAL-SECURITY-USERID: jb-us-seller_api1.paypal.com"  -H "X-PAYPAL-SECURITY-PASSWORD: WX4WTU3S8MY44S7F" -H "X-PAYPAL-SECURITY-SIGNATURE: AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy" -H "X-PAYPAL-REQUEST-DATA-FORMAT: NV" -H "X-PAYPAL-RESPONSE-DATA-FORMAT: NV" -H "X-PAYPAL-APPLICATION-ID: app_id"  https://svcs.sandbox.paypal.com/Permissions/RequestPermissions -d "requestEnvelope.errorLanguage=en_US&scope=EXPRESS_CHECKOUT&callback=http://www.clickplan.net/permissions_callback"
+
+2. Response is :
+
+responseEnvelope.timestamp=2013-02-09T18%3A09%3A30.367-08%3A00&responseEnvelope.ack=Failure&responseEnvelope.correlationId=4b1fb624de294&responseEnvelope.build=2210301&error(0).errorId=560022&error(0).domain=PLATFORM&error(0).subdomain=Application&error(0).severity=Error&error(0).category=Application&error(0).message=The+X-PAYPAL-APPLICATION-ID+header+contains+an+invalid+value&error(0).parameter(0)=X-PAYPAL-APPLICATION-ID
+
+Error : Header contains an invalid value. To fix it provide the app_id: APP-80W284485P519543T
+
+3. 
+
+curl -s --insecure -H "X-PAYPAL-SECURITY-USERID: jb-us-seller_api1.paypal.com"  -H "X-PAYPAL-SECURITY-PASSWORD: WX4WTU3S8MY44S7F" -H "X-PAYPAL-SECURITY-SIGNATURE: AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy" -H "X-PAYPAL-REQUEST-DATA-FORMAT: NV" -H "X-PAYPAL-RESPONSE-DATA-FORMAT: NV" -H "X-PAYPAL-APPLICATION-ID: APP-80W284485P519543T"  https://svcs.sandbox.paypal.com/Permissions/RequestPermissions -d "requestEnvelope.errorLanguage=en_US&scope=EXPRESS_CHECKOUT&callback=http://www.clickplan.net/permissions_callback"
+
+4. responseEnvelope.timestamp=2013-02-09T18%3A12%3A43.525-08%3A00&responseEnvelope.ack=Success&responseEnvelope.correlationId=8c145c01092e7&responseEnvelope.build=2210301&token=AAAAAAAXWj8VP.gvOznK
+
+We now have a valid token.
+
+
+Step 2 :
+
+Open https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_grant-permission&request_token=AAAAAAAXWkNqUANS4g60 on the browser. Login as the sandbox buyer. Grant access to the shopping cart.
+
+Paypal redirects to the callback URL : http://www.clickplan.net/permissions_callback?request_token=AAAAAAAXWj8VP.gvOznK&verification_code=.pz0y0Oks7sLh04259IGXg
+
+Second re-direct:
+
+http://www.clickplan.net/permissions_callback?request_token=AAAAAAAXWkNqUANS4g60&verification_code=PzsWvCe8z2BBkPyO-sI3fQ
+
+Step 3 : GetAccessToken API (token, verifier) -> scope, access token, token secret
+
+curl -s --insecure -H "X-PAYPAL-SECURITY-USERID: jb-us-seller_api1.paypal.com" -H "X-PAYPAL-SECURITY-PASSWORD: WX4WTU3S8MY44S7F" -H "X-PAYPAL-SECURITY-SIGNATURE: AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy" -H "X-PAYPAL-REQUEST-DATA-FORMAT: NV" -H "X-PAYPAL-RESPONSE-DATA-FORMAT: NV" -H "X-PAYPAL-APPLICATION-ID: APP-80W284485P519543T" https://svcs.sandbox.paypal.com/Permissions/GetAccessToken -d "requestEnvelope.errorLanguage=en_US&token=AAAAAAAXWkNqUANS4g60&verifier=PzsWvCe8z2BBkPyO-sI3fQ"
+
+Response:
+
+responseEnvelope.timestamp=2013-02-09T18%3A35%3A11.909-08%3A00&responseEnvelope.ack=Success&responseEnvelope.correlationId=f551adbd4cc7d&responseEnvelope.build=2210301&scope(0)=EXPRESS_CHECKOUT&token=ZxMeIB.IBDlRFwdfxkH29I53WZNgOKpkR.vBW5FW6idkjv-..wO7iQ&tokenSecret=394LfTs0U3BDEfnCJQy.LeB77o4
+
+After Completing This Task:
+
+You use the access token and associated secret to create an authentication header, X-PAYPALAUTHORIZATION. When you call PayPal API operations, the authentication header specifies whether you have permission to make the call on behalf of the account holder.
+

@@ -1,3 +1,16 @@
+GIT
+  remote: https://github.com/paypal/permissions-sdk-ruby.git
+  revision: d13da42d6b28fe42b3c339fa78b7d4c942a17703
+  specs:
+    permissions_samples (1.96.1)
+      coderay
+      haml
+      jquery-rails
+      paypal-sdk-permissions
+      rails (~> 3.2.9)
+      simple_form
+      twitter-bootstrap-rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -30,6 +43,7 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     builder (3.0.4)
+    coderay (1.0.8)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -40,6 +54,7 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    haml (3.1.7)
     hike (1.2.1)
     i18n (0.6.1)
     journey (1.0.4)
@@ -56,8 +71,8 @@ GEM
     paypal-sdk-core (0.1.5)
       multi_json (~> 1.0)
       xml-simple
-    paypal-sdk-permissions (1.96.1)
-      paypal-sdk-core (~> 0.1.2)
+    paypal-sdk-permissions (1.96.0)
+      paypal-sdk-core (~> 0.1.0)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -89,6 +104,9 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    simple_form (2.0.4)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -100,6 +118,10 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    twitter-bootstrap-rails (2.2.1)
+      actionpack (>= 3.1)
+      execjs
+      railties (>= 3.1)
     tzinfo (0.3.35)
     uglifier (1.3.0)
       execjs (>= 0.3.0)
@@ -113,6 +135,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   jquery-rails
   paypal-sdk-permissions
+  permissions_samples!
   rails (= 3.2.11)
   sass-rails (~> 3.2.3)
   sqlite3

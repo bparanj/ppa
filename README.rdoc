@@ -1,3 +1,5 @@
+Steps from : https://www.x.com/sites/default/files/pp_permissions.pdf
+
 Step 1 : RequestPermissions API (API credentials)
 
 1. Curl with the sample paypal.yml config values:
@@ -18,14 +20,13 @@ curl -s --insecure -H "X-PAYPAL-SECURITY-USERID: jb-us-seller_api1.paypal.com"  
 
 We now have a valid token.
 
-
 Step 2 :
 
 Open https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_grant-permission&request_token=AAAAAAAXWkNqUANS4g60 on the browser. Login as the sandbox buyer. Grant access to the shopping cart.
 
 Paypal redirects to the callback URL : http://www.clickplan.net/permissions_callback?request_token=AAAAAAAXWj8VP.gvOznK&verification_code=.pz0y0Oks7sLh04259IGXg
 
-Second re-direct:
+Second re-direct: (First hit failed because token is valid only for 15 minutes)
 
 http://www.clickplan.net/permissions_callback?request_token=AAAAAAAXWkNqUANS4g60&verification_code=PzsWvCe8z2BBkPyO-sI3fQ
 
@@ -41,3 +42,7 @@ After Completing This Task:
 
 You use the access token and associated secret to create an authentication header, X-PAYPALAUTHORIZATION. When you call PayPal API operations, the authentication header specifies whether you have permission to make the call on behalf of the account holder.
 
+
+
+
+curl --request POST 'http://localhost:3055/samples/permissions/get_access_token?request_token=AAAAAAAXWkul6jyIqmOe&verification_code=cQ8fdemRGGYVslTeSZQ6dw'

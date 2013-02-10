@@ -23,3 +23,4 @@ end
 gem 'jquery-rails'
 
 gem 'paypal-sdk-permissions'
+gem 'permissions_samples', :git => "https://github.com/paypal/permissions-sdk-ruby.git", :group => :development

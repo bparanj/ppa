@@ -1,2 +1,1 @@
-Use this README file to introduce your application and point to useful places in the API for learning more.
-Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+TODO : Do we need to set the X-PAYPALAUTHORIZATION header when making Express Checkout calls? Is it enough to specify the :subject field alone?
